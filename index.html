@@ -24,7 +24,7 @@
             width: 200px;
             height: 200px;
             position: relative;
-            margin-top: 20px; /* Memberi jarak agar teks tidak bertabrakan */
+            margin-top: 20px;
         }
 
         h1 {
@@ -33,7 +33,7 @@
             text-transform: uppercase;
             text-align: center;
             position: absolute;
-            top: -50px; /* Menggeser teks ke atas bola */
+            top: -50px;
             left: 50%;
             transform: translateX(-50%);
             animation: rainbow 2s infinite alternate;
@@ -59,7 +59,7 @@
             width: 80%;
             max-width: 800px;
             border: 2px solid #00ff00;
-            margin-top: 30px; /* Agar container tidak terlalu dekat dengan bola */
+            margin-top: 30px;
         }
 
         input {
@@ -117,6 +117,20 @@
     </div>
 
     <script>
+        // Sistem login sebelum mengakses halaman
+        function verifyAccess() {
+            let password = prompt("Masukkan kode login admin:");
+            let correctPassword = "As8$+8?emCYdE+9HPbPxLQ&cq@zAYh";
+
+            if (password !== correctPassword) {
+                alert("Kode salah! Menutup halaman...");
+                window.close(); 
+                document.body.innerHTML = ""; 
+            }
+        }
+
+        verifyAccess(); 
+
         function fetchURL() {
             const urlInput = document.getElementById('urlInput').value.trim();
             const outputDiv = document.getElementById('output');
@@ -161,6 +175,19 @@
             renderer.render(scene, camera);
         }
         animate();
+
+        // Mencegah inspeksi elemen
+        document.addEventListener("keydown", function (event) {
+            if (event.ctrlKey && (event.key === "U" || event.key === "u" || event.key === "I" || event.key === "i" || event.key === "J" || event.key === "j")) {
+                event.preventDefault();
+                alert("Inspeksi elemen dinonaktifkan!");
+            }
+        });
+
+        document.addEventListener("contextmenu", function (event) {
+            event.preventDefault();
+            alert("Klik kanan dinonaktifkan!");
+        });
     </script>
 
 </body>
